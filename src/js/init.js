@@ -16,9 +16,8 @@
 		// Remove "loading" class once the page has fully loaded.
 			window.onload = function() {
 				document.body.className = '';
-				var em_href = 'mail' + 'to:'
-					+ ['mail', ['zacklytle', 'com'].join('.')].join('@');
-				document.getElementById('lytle_email').href = em_href;
+				document.getElementById('lytle_email').href = 'mail' + 'to:'
+                    + ['mail', ['zacklytle', 'com'].join('.')].join('@');
 
 				document.getElementById('lytle_phone').href = "tel:+15403157135";
 			}

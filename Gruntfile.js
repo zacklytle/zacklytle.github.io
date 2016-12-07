@@ -1,4 +1,4 @@
-var defaultTasks = ['sass', 'htmlmin'];
+var defaultTasks = ['sass','inline', 'htmlmin'];
 
 module.exports = function(grunt) {
   grunt.initConfig({
@@ -18,16 +18,28 @@ module.exports = function(grunt) {
               }]
           }
       },
+      inline: {
+          dist: {
+              options: {
+                  cssmin: true,
+                  tag: '',
+                  uglify: true
+              },
+              src: 'src/index.html',
+              dest: 'index.html'
+          }
+      },
       htmlmin: {
           dist: {
               options: {
                   removeComments: true,
                   collapseWhitespace: true,
                   minifyCSS: true,
-                  minifyJS: true
+                  minifyJS: true,
+                  minifyURLs: {}
               },
               files: {
-                  'index.html': 'src/index.html'
+                  'index.html': 'index.html'
               }
           }
       },
@@ -44,6 +56,7 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-inline');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.registerTask('default', defaultTasks);

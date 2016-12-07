@@ -1,4 +1,4 @@
-var defaultTasks = ['sass', 'critical', 'watch'];
+var defaultTasks = ['sass', 'htmlmin'];
 
 module.exports = function(grunt) {
   grunt.initConfig({
@@ -18,46 +18,33 @@ module.exports = function(grunt) {
               }]
           }
       },
-      //critical optimization
-      critical: {
+      htmlmin: {
           dist: {
               options: {
-                  base: './',
-                  src: 'src/index.html',
-                  dest: 'index.html',
-                  inline: true,
-                  minify: true,
-                  assetPaths: [
-                      '/css'
-                  ],
-                  dimensions: [{
-                      width: 480
-                  },{
-                      width: 736
-                  },{
-                      width: 1280
-                  },{
-                      width: 1680
-                  }],
-                  ignore: ['@font-face']
-            }
+                  removeComments: true,
+                  collapseWhitespace: true,
+                  minifyCSS: true,
+                  minifyJS: true
+              },
+              files: {
+                  'index.html': 'src/index.html'
+              }
           }
       },
     // watch for changes (for dev)
     watch: {
       scripts: {
-        files: ['src/sass/**/*.scss', 'src/index.html', 'src/js/**/*.js', 'Gruntfile.js'],
+        files: ['src/sass/**/*.scss', 'src/index.html', '/js/**/*.js', 'Gruntfile.js'],
         tasks: defaultTasks,
         options: {
-          debounceDelay: 250,
+          debounceDelay: 250
         }
       }
     }
   });
 
-  grunt.loadNpmTasks('grunt-critical');
   grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-contrib-watch');
-
   grunt.registerTask('default', defaultTasks);
 };

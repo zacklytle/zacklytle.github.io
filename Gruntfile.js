@@ -1,4 +1,4 @@
-var defaultTasks = ['sass','inline', 'htmlmin'];
+var defaultTasks = ['sass', 'htmlmin'];
 
 module.exports = function(grunt) {
   grunt.initConfig({
@@ -11,22 +11,11 @@ module.exports = function(grunt) {
               },
               files: [{
                   expand: true,
-                  cwd: 'src/sass/',
+                  cwd: 'sass/',
                   src: ['**/*.scss'],
                   dest: 'css/',
                   ext: '.css'
               }]
-          }
-      },
-      inline: {
-          dist: {
-              options: {
-                  cssmin: true,
-                  tag: '',
-                  uglify: true
-              },
-              src: 'src/index.html',
-              dest: 'index.html'
           }
       },
       htmlmin: {
@@ -39,14 +28,14 @@ module.exports = function(grunt) {
                   minifyURLs: {}
               },
               files: {
-                  'index.html': 'index.html'
+                  'index.html': 'src/index.html'
               }
           }
       },
     // watch for changes (for dev)
     watch: {
       scripts: {
-        files: ['src/sass/**/*.scss', 'src/index.html', '/js/**/*.js', 'Gruntfile.js'],
+        files: ['sass/**/*.scss', 'src/index.html', '/js/**/*.js', 'Gruntfile.js'],
         tasks: defaultTasks,
         options: {
           debounceDelay: 250
@@ -56,7 +45,6 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-contrib-sass');
-  grunt.loadNpmTasks('grunt-inline');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.registerTask('default', defaultTasks);
